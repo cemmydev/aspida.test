@@ -191,7 +191,7 @@ include "GameEngine/Data/alt.php";
     if($bids==0){ $outputList .= "<span class=\"none\">".$bids."</span>"; }else{ $outputList .= $bids; }
     $outputList .= "</td>";
 	$outputList .= "<td class=\"silver".$sStyle."\" title=\"".round($silver/$num, 2)." per unit\">".$silver."</td>";
-	$outputList .= "<td class=\"time".$sStyle."\"><span id=\"timer".$timer."\">".$generator->getTimeFormat($time-time())."</span></td>";
+	$outputList .= "<td class=\"time".$sStyle."\"><span id=\"timer".$timer."\">".$generator->getTimeFormat(max(10, $time-time()))."</span></td>";
 	$outputList .= "";
     
     if($session->silver > $silver || $session->uid == $uid){

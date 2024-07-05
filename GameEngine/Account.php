@@ -58,14 +58,14 @@ class Account {
 			else {
 				//verify captcha
 			}
-			$email_ban = json_decode(file_get_contents('https://www.aspidanetwork.com/'.'ban_system/check_email_ban.php?email='.urlencode($_POST['email']).'&ip='.$_SERVER['REMOTE_ADDR']),true);
-			if(!empty($email_ban) && !empty($email_ban) && isset($email_ban['result']) && $email_ban['result']){
-				$form->addError("email", "Email is blacklisted!");
-			}
-			$domain_ban = json_decode(file_get_contents('https://www.aspidanetwork.com/'.'ban_system/check_email_domain.php?action=check&email='.urlencode($_POST['email'])),true);
-			if(!empty($domain_ban) && !empty($domain_ban) && isset($domain_ban['result']) && $domain_ban['result']){
-				$form->addError("email", "Email is blacklisted!");
-			}
+			// $email_ban = json_decode(file_get_contents('https://www.aspidanetwork.com/'.'ban_system/check_email_ban.php?email='.urlencode($_POST['email']).'&ip='.$_SERVER['REMOTE_ADDR']),true);
+			// if(!empty($email_ban) && !empty($email_ban) && isset($email_ban['result']) && $email_ban['result']){
+			// 	$form->addError("email", "Email is blacklisted!");
+			// }
+			// $domain_ban = json_decode(file_get_contents('https://www.aspidanetwork.com/'.'ban_system/check_email_domain.php?action=check&email='.urlencode($_POST['email'])),true);
+			// if(!empty($domain_ban) && !empty($domain_ban) && isset($domain_ban['result']) && $domain_ban['result']){
+			// 	$form->addError("email", "Email is blacklisted!");
+			// }
         }
         if (!isset($_POST['pw']) || trim($_POST['pw']) == "") {
             $form->addError("pw", PW_EMPTY);
@@ -186,6 +186,7 @@ class Account {
         $time = time();
         $starttime = OPENING;
         if ($starttime < $time) {
+            // var_dump($_POST);
             $sitlogin = $database->sitterLogin($_POST['user'], $_POST['pw']);
             if (!$sitlogin[0]) {
                 $ownlogin = $database->login($_POST['user'], $_POST['pw']);		
@@ -193,6 +194,7 @@ class Account {
             } else {
                 $ownlogin = false;
             }
+            // var_dump($sitlogin, $ownlogin);
             if (!isset($_POST['user']) || $_POST['user'] == "") {
                 $form->addError("user", LOGIN_USR_EMPTY);
             } else if (!$database->checkExist($_POST['user'], 0)) {
@@ -200,7 +202,7 @@ class Account {
             }
             if (!isset($_POST['pw']) || $_POST['pw'] == "") {
                 $form->addError("pw", LOGIN_PASS_EMPTY);
-            } else if (!$sitlogin && !$ownlogin) {
+            } else if (!$sitlogin[0] && !$ownlogin) {
                 $form->addError("pw", LOGIN_PW_ERROR);
             }
             if ($form->returnErrors() > 0) {

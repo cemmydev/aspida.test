@@ -3,16 +3,15 @@ $start = microtime(true);
 
 include "GameEngine/Village.php";
 
-$_SESSION['dorf']=$session->link=1;
+$_SESSION['dorf'] = $session->link = 1;
 
-if(isset($_GET['visit'])){
+if (isset($_GET['visit'])) {
 
-    $database->UpdateAchievU($session->uid,"`a7`=1"); //ачивка за группу
+    $database->UpdateAchievU($session->uid, "`a7`=1"); //ачивка за группу
 
     header("Location:dorf1.php");
 
     exit;
-
 }
 
 include("GameEngine/Building.php");
@@ -27,149 +26,112 @@ $building->procBuild($_GET);
 
 <html>
 
-<?php include("Templates/html.php");?>
+<?php include("Templates/html.php"); ?>
 
-<body class="v35 <?=$database->bodyClass($_SERVER['HTTP_USER_AGENT']); ?> village1 perspectiveResources">
+<body class="v35 <?= $database->bodyClass($_SERVER['HTTP_USER_AGENT']); ?> village1 perspectiveResources ltr en-US blink" data-theme="default">
 
-<script type="text/javascript">
-
-    window.ajaxToken = 'de3768730d5610742b5245daa67b12cd';
-
-</script>
+    <script type="text/javascript">
+        window.ajaxToken = 'de3768730d5610742b5245daa67b12cd';
+    </script>
 
 
 
-<div id="background">
+    <div id="background">
 
-    <div id="headerBar"></div>
+        <?php include("topBar.php"); ?>
+        <?php include("Templates/topBarHero.php"); ?>
+        <!-- <div id="bodyWrapper"> -->
 
-    <div id="bodyWrapper">
 
 
-
-        <div id="header">
-
-            <?php
-
-            include("Templates/topheader.php");
-
-            include("Templates/toolbar.php");
-
-            ?>
-
-        </div>
 
         <div id="center">
-
-
-
-            <?php
-
-            include("Templates/sideinfo.php");?>
-
-
-
-
+            <?php include("Templates/sideinfo.php"); ?>
 
             <div id="contentOuterContainer" class="size1">
 
-                <?php   include("Templates/res.php");
 
+                <!-- <div class="contentTitle">
 
+                        &nbsp;
+                    </div> -->
 
-                ?>
+                <!-- <div class="contentContainer"> -->
 
-                <div class="contentTitle">
+                <div class="village1">
 
-                    &nbsp;</div>
-
-                <div class="contentContainer">
-
-                    <div id="content" class="village1">
-
-<?php
-
-             include("Templates/field.php");
-
-if(!isset($timer)){
-
+                    <?php
+                    include("Templates/field.php");
+                    if (!isset($timer)) {
                         $timer = 1;
+                    }
+                    if ($building->NewBuilding) {
+                        include("Templates/Building.php");
+                    }
+                    ?>
 
-}
+                    <div id="map_details" class="villageInfoWrapper">
 
-                        if ($building->NewBuilding) {
-
-                            include("Templates/Building.php");
-
-                        }
-
-                        ?>
-
-                        <div id="map_details">
-
-                            <div class="movements">
+                        <!-- <div class="movements">
 
                                 <?php
 
                                 include("Templates/movement.php");
 
-                                ?></div>
+                                ?>
+                            </div> -->
 
-                            <?php
+                        <?php
 
-                            include("Templates/production.php");
+                        include("Templates/production.php");
 
-                            include("Templates/troops.php");
+                        include("Templates/troops.php");
 
-                            echo '<div class="clear"></div>';
+                        echo '<div class="clear"></div>';
 
-                            echo '</div>';
+                        echo '</div>';
 
-                            ?>
-							<div class="clear"></div>
-
-
-
+                        ?>
+                        <div class="clear"></div>
 
 
-                        </div></div>
 
+
+
+                    </div>
                 </div>
 
-                <?php
+                <!-- </div> -->
 
-                include("Templates/rightsideinfor.php");
-				//require 'Templates/quest.php';
+                <?php include("Templates/rightsideinfor.php");
+                    //require 'Templates/quest.php';
                 ?>
 
                 <div class="clear"></div>
 
-                </div>
-				
-
-            <?php
-
-            include("Templates/header.php");
-
-            ?>
-			<?php
-			include("Templates/footer.php");
-			?>
-
             </div>
 
-            <div id="ce"></div>
+
+            <?php include("Templates/header.php"); ?>
+            <?php include("Templates/footer.php"); ?>
 
         </div>
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110012133-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <div id="ce"></div>
 
-  gtag('config', 'UA-110012133-1');
-</script>
+        <!-- </div> -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110012133-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-110012133-1');
+        </script>
 
 </html>

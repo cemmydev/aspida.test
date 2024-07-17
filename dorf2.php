@@ -69,7 +69,7 @@ if (isset($_GET['pivo'])) {
                 </div>
             </div>
             <?php include("Templates/rightsideinfor.php"); ?>
-            <?php include("Templates/header.php"); ?>
+            <?php //include("Templates/header.php"); ?>
             <?php include("Templates/footer.php"); ?>
             <div class="clear"></div>
         </div>

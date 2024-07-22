@@ -149,7 +149,7 @@ else{
                             <div class="heroXpBarBox" title="Experience: <?=$hero['experience']?>">
                                 <a href="hero_inventory.php"><img src="img/x.gif" class="iExperience"></a>
                                 <div class="bar"
-                                    style="width:<?php echo round(100 * (($hero['experience'] - $hero_levels[$hero['level']]) / ($hero_levels[$hero['level'] + 1] - $hero_levels[$hero['level']])), 1); ?>%">
+                                    style="width:<?php echo ($hero_levels[$hero['level'] + 1] - $hero_levels[$hero['level']] == 0) ? 0: round(100 * (($hero['experience'] - $hero_levels[$hero['level']]) / ($hero_levels[$hero['level'] + 1] - $hero_levels[$hero['level']])), 1); ?>%">
                                     &nbsp;</div>
                             </div>
                         </li>
